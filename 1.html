@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>突袭奖章计算器</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .input-group label {
+            width: 60px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .input-group input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 70px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .input-group input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        .city-inputs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .toggle-btn {
+            background-color: #95a5a6;
+            margin-bottom: 15px;
+            padding: 8px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .toggle-btn:hover {
+            background-color: #7f8c8d;
+        }
+        .total-attacks {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        .note {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>城池突袭货币计算器</h1>
+        
+        <div class="section">
+            <div class="section-title">主城信息</div>
+            <button id="toggleMain" class="toggle-btn">显示1-8级主城</button>
+            <div id="mainCityInputs" class="city-inputs">
+                <div class="input-group">
+                    <label>9级:</label>
+                    <input type="number" id="main-9" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>10级:</label>
+                    <input type="number" id="main-10" min="0" class="city-input">
+                </div>
+            </div>
+            <div id="additionalMainCities" class="city-inputs" style="display:none;margin-top:15px;">
+                <div class="input-group">
+                    <label>1级:</label>
+                    <input type="number" id="main-1" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>2级:</label>
+                    <input type="number" id="main-2" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>3级:</label>
+                    <input type="number" id="main-3" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>4级:</label>
+                    <input type="number" id="main-4" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>5级:</label>
+                    <input type="number" id="main-5" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>6级:</label>
+                    <input type="number" id="main-6" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>7级:</label>
+                    <input type="number" id="main-7" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>8级:</label>
+                    <input type="number" id="main-8" min="0" class="city-input">
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">子城信息</div>
+            <div class="city-inputs">
+                <div class="input-group">
+                    <label>1级:</label>
+                    <input type="number" id="sub-1" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>2级:</label>
+                    <input type="number" id="sub-2" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>3级:</label>
+                    <input type="number" id="sub-3" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>4级:</label>
+                    <input type="number" id="sub-4" min="0" class="city-input">
+                </div>
+                <div class="input-group">
+                    <label>5级:</label>
+                    <input type="number" id="sub-5" min="0" class="city-input">
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">其他信息</div>
+            <div class="input-group">
+                <label for="attacks">进攻次数:</label>
+                <input type="number" id="attacks" min="0" value="0">
+                <div class="total-attacks">(当前城池数: <span id="totalCities">0</span>)</div>
+            </div>
+            <div class="input-group" style="margin-top:15px;">
+                <label for="defense">防守货币:</label>
+                <input type="number" id="defense" min="0">
+            </div>
+        </div>
+        
+        <div class="result" id="result">
+            预计获得奖章数: <span id="medals">0</span>
+        </div>
+    </div>
+
+    <script>
+        // 主城货币值
+        const mainValues = {
+            1: 45,
+            2: 180,
+            3: 360,
+            4: 585,
+            5: 810,
+            6: 1115,
+            7: 1240,
+            8: 1260,
+            9: 1375,
+            10: 1450
+        };
+        
+        // 子城货币值
+        const subValues = {
+            1: 135,
+            2: 225,
+            3: 350,
+            4: 405,
+            5: 460
+        };
+        
+        // 切换主城显示
+        document.getElementById('toggleMain').addEventListener('click', function() {
+            const additionalCities = document.getElementById('additionalMainCities');
+            const btn = document.getElementById('toggleMain');
+            
+            if (additionalCities.style.display === 'none') {
+                additionalCities.style.display = 'grid';
+                btn.textContent = '隐藏1-8级主城';
+            } else {
+                additionalCities.style.display = 'none';
+                btn.textContent = '显示1-8级主城';
+            }
+        });
+        
+        // 获取所有输入元素
+        const cityInputs = document.querySelectorAll('.city-input');
+        const attacksInput = document.getElementById('attacks');
+        const defenseInput = document.getElementById('defense');
+        const totalCitiesSpan = document.getElementById('totalCities');
+        
+        // 跟踪是否手动修改过进攻次数
+        let isAttacksManuallySet = false;
+        
+        // 计算总城池数量
+        function calculateTotalCities() {
+            let total = 0;
+            cityInputs.forEach(input => {
+                total += input.value !== '' ? parseInt(input.value) || 0 : 0;
+            });
+            return total;
+        }
+        
+        // 更新进攻次数和计算结果
+        function updateCalculations() {
+            const totalCities = calculateTotalCities();
+            totalCitiesSpan.textContent = totalCities;
+            
+            // 如果用户没有手动设置过进攻次数，或者进攻次数等于之前的城池总数
+            // 则自动更新进攻次数为新的城池总数
+            if (!isAttacksManuallySet || parseInt(attacksInput.value) === lastTotalCities) {
+                if (totalCities > 0) {
+                    attacksInput.value = totalCities;
+                } else {
+                    attacksInput.value = 0;
+                }
+            }
+            
+            lastTotalCities = totalCities;
+            
+            // 计算主城总货币
+            let mainTotal = 0;
+            for (let i = 1; i <= 10; i++) {
+                const input = document.getElementById(`main-${i}`);
+                const count = input && input.value !== '' ? parseInt(input.value) || 0 : 0;
+                mainTotal += count * mainValues[i];
+            }
+            
+            // 计算子城总货币
+            let subTotal = 0;
+            for (let i = 1; i <= 5; i++) {
+                const input = document.getElementById(`sub-${i}`);
+                const count = input && input.value !== '' ? parseInt(input.value) || 0 : 0;
+                subTotal += count * subValues[i];
+            }
+            
+            // 获取其他输入
+            const attacks = parseInt(attacksInput.value) || 1;
+            const defense = defenseInput.value !== '' && parseInt(defenseInput.value) !== 0 ? parseInt(defenseInput.value) : null;
+            
+            // 计算奖章数
+            let medals;
+            if (attacks >= 6) {
+                // 新规则：进攻次数>6时
+                medals = (mainTotal + subTotal)  / attacks * 6;
+            } else {
+                // 旧规则
+                medals = (mainTotal + subTotal) / attacks * attacks;
+            }
+            
+            // 如果输入了有效的防守货币(非0)，则限制最大值为1620
+            if (defense !== null) {
+                medals += defense;
+                if (medals > 1620) {
+                    medals = 1620 + defense;
+                }
+            }
+            
+            // 显示结果
+            document.getElementById('medals').textContent = Math.round(medals);
+        }
+        
+        // 记录上次的城池总数
+        let lastTotalCities = 0;
+        
+        // 为所有城池输入框添加事件监听
+        cityInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                updateCalculations();
+                // 城池数量变化后，重置手动设置标志
+                isAttacksManuallySet = false;
+            });
+        });
+        
+        // 进攻次数输入框事件监听
+        attacksInput.addEventListener('input', function() {
+            // 标记为手动设置
+            isAttacksManuallySet = true;
+            updateCalculations();
+        });
+        
+        defenseInput.addEventListener('input', updateCalculations);
+        
+        // 初始化计算
+        updateCalculations();
+    </script>
+</body>
+</html>
